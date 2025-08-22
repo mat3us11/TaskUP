@@ -94,3 +94,7 @@ h2{
     color: rgba(0, 0, 0, 0.712);
      font-size: clamp(24px, 1.6vw, 38px);
 }
+.img{
+  width: clamp(150px,30vw, 700px); /* mínimo, responsivo, máximo */
+  height: auto;
+}
