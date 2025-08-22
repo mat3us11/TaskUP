@@ -85,7 +85,9 @@ main {
     cursor: pointer;
     border: none;
     width: 23%;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
+
 .botao-branco{
     font-size: 13px;
     padding: 15px;
@@ -93,6 +95,12 @@ main {
     cursor: pointer;
     border: solid 0.1px rgba(0, 0, 0, 0.089);
     width: 23%;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.botao-branco:hover, .botao-azul:hover {
+  transform: scale(1.01); /* cresce */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* sombra */
 }
 
 .funcionalidades{
@@ -114,9 +122,7 @@ main {
     width: 55%;
     display: flex;
     flex-direction: row;
-    align-items: center;
-
-    
+    align-items: center;    
 }
 
 .funcionalidades .icone1,.icone2, .icone3{
@@ -124,11 +130,7 @@ main {
     width: 40%;
     flex-direction: column;
     align-items: center;
-    
-
 }
-
-
 
 .funcionalidades .icone1 i, .icone2 i, .icone3 i{
     font-size: 25px;
@@ -155,7 +157,6 @@ main {
     background-color: rgba(138, 130, 130, 0.034);
     flex-direction: column;
     align-items: center;
-
 }
 
 .funcionalidades .quadrado1 i, .quadrado2 i, .quadrado3 i{
