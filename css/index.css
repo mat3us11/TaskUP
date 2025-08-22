@@ -77,22 +77,22 @@ main {
 }
 
 .botao-azul{
-    font-size: 15px;
+    font-size: 13px;
     padding: 15px;
     background-color: #364fb2;
     color: white;
     border-radius: 5px;
     cursor: pointer;
     border: none;
-    width: 17%;
+    width: 23%;
 }
 .botao-branco{
-    font-size: 15px;
+    font-size: 13px;
     padding: 15px;
     border-radius: 5px;
     cursor: pointer;
     border: solid 0.1px rgba(0, 0, 0, 0.089);
-    width: 17%;
+    width: 23%;
 }
 
 .funcionalidades{
