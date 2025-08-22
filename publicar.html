@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/publicar.css">
-    <link rel="stylesheet"type="text/css"href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+
     <title>Página inicial</title>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -22,9 +27,50 @@
         </div>
     </header>
 
-    <div class="container">
+    <main>
+        <div class="form-container">
+            <h2>Publicar serviços</h2>
+            <form>
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" placeholder="Exemplo: Desenvolvedor web">
 
-    </div>
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao"
+                    placeholder="Exemplo: Desenvolvo sites usando HTML, CSS e JavaScript"></textarea>
 
+                <div class="preco-categoria">
+                    <div class="preco">
+                        <label for="preco">Preço</label>
+                        <input type="text" id="preco" placeholder="R$ Exemplo: 25">
+                    </div>
+
+                    <div class="categoria">
+                        <label for="categoria">Categoria</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="" disabled selected>Selecionar</option>
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="fiat">Fiat</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="image-grid" id="image-grid">
+                    <div class="image-slot add" id="slot-0">
+                        <input type="file" accept="image/*" id="upload-0">
+                        <label for="upload-0"><span>+</span></label>
+                    </div>
+                </div>
+
+
+
+                <button type="submit">Publicar</button>
+            </form>
+        </div>
+
+    </main>
+    <script src="js/publicar.js"></script>
 </body>
+
 </html>
