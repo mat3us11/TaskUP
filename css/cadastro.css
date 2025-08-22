@@ -68,10 +68,11 @@ main{
     border: 2px solid rgba(0, 0, 0, 0.308);
     border-radius: 7px;
     outline: none;
+     font-size: clamp(13px, 0.9vw, 28px);
 }
 .botao{
     height: 7vh;
-    width: 21.27vw;
+    width: 21vw;
     background-color: #2765ec;
     border-radius: 10px;
     border-color: rgb(128, 147, 255);
@@ -83,7 +84,7 @@ main{
     display: flex;
     flex-direction: row;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.8rem;
+    font-size: clamp(10px, 0.9vw, 20px);
     gap: 6px;
 }
 .npclogin1{color: rgba(0, 0, 0, 0.781)}
@@ -91,4 +92,5 @@ main{
 h2{
     font-family: Arial, Helvetica, sans-serif;
     color: rgba(0, 0, 0, 0.712);
+     font-size: clamp(24px, 1.6vw, 38px);
 }
