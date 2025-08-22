@@ -61,12 +61,12 @@ main{
 .dados-preencher{
     background-repeat: no-repeat;
     background-position: 8px center;
-    padding-left: 4vw ; /* espaço pro texto */
+    padding-left: 8vh ; /* espaço pro texto */
 
     height: 7vh;
     width: 17vw;
     border: 2px solid rgba(0, 0, 0, 0.308);
-    border-radius: 10px;
+    border-radius: 7px;
     outline: none;
 }
 .botao{
@@ -77,7 +77,7 @@ main{
     border-color: rgb(128, 147, 255);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.9rem;
+    font-size: 110%;
 }
 .baixo{
     display: flex;
