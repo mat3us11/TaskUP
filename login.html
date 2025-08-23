@@ -4,35 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet"type="text/css"href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <title>Login - TaskUp</title>
 </head>
 <body>
     <main>
         <div class="principal">
-            <div class = "container">
+            <div class="container">
                 <!-- imagem -->
             </div>
             
-            <div class = "formulario">
-                <h2 class = "titulo">Login</h2>
-                <form action="" method="POST">
+            <div class="formulario">
+                <h2 class="titulo">Login</h2>
+                <form id="loginForm">
                     <div class="email-input">                        
                         <input type="text" id="email" name="email" placeholder="Digite seu e-mail" class="email">
                     </div>
 
                     <div class="senha-input">                     
-                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" class="senha">
+                        <input type="password" id="password" name="senha" placeholder="Digite sua senha" class="senha">
                     </div>
                     
-                    <button type="submit" class = "botao">Acessar</button>
+                    <button type="submit" class="botao">Acessar</button>
 
                     <div class="cadastro-link">
-                        <p class="npclogin1">Não tem uma conta?<a href="cadastro.html"><p class="npclogin2">Crie uma conta</p></a></p>
+                        <p class="npclogin1">Não tem uma conta? <a href="cadastro.html"><span class="npclogin2">Crie uma conta</span></a></p>
                     </div>
                 </form>
+                <p id="msg"></p> 
             </div>
         </div>
     </main>
+    <script type="module" src="/js/login.js"></script>
 </body>
 </html>

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet"type="text/css"href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <title>Página inicial</title>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -15,9 +18,11 @@
 
         <div class="menu">
             <ul>
-                <li><a href="servicos.html">Serviços</a></li>
-                <li><a href="publicar.html">Publicar</a></li>
-                <li><a href="perfil.html">Login</a></li>
+                <li><a href="servicos.html" id="link-servicos">Serviços</a></li>
+                <li><a href="publicar.html" id="link-publicar">Publicar</a></li>
+                <li id="user-area">
+                    <a href="login.html" id="loginLink">Login</a>
+                </li>
             </ul>
         </div>
     </header>
@@ -25,11 +30,16 @@
     <main>
         <div class="container">
             <div class="texto">
-                <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora distinctio dolorem possimus, quos dolores suscipit qui .</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo eaque ipsa ab ducimus similique, tempore natus cumque non quo sit? Neque esse hic molestiae sapiente ratione officiis iste earum! Enim.</p>
+                <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora distinctio dolorem possimus, quos
+                    dolores suscipit qui .</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo eaque ipsa ab ducimus similique,
+                    tempore natus cumque non quo sit? Neque esse hic molestiae sapiente ratione officiis iste earum!
+                    Enim.</p>
                 <div class="botoes">
-                   <a href="servicos.html"><button class="botao-azul"><b>Eplorar Serviços</b></button></a> 
-                    <a href="publicar.html"><button class="botao-branco"><b>Publicar Serviço</b></button></a>
+                    <a href="servicos.html" id="btn-servicos"><button class="botao-azul"><b>Explorar
+                                Serviços</b></button></a>
+                    <a href="publicar.html" id="btn-publicar"><button class="botao-branco"><b>Publicar
+                                Serviço</b></button></a>
                 </div>
             </div>
             <div class="notebook-img"><img src="img/modern desktop computer-rafiki.svg" alt="compiuter"></div>
@@ -55,33 +65,36 @@
             <div class="quadrados">
                 <div class="quadrado1">
                     <i class="ph ph-paint-brush"></i>
-                    <P>Design</P>
+                    <p>Design</p>
                 </div>
                 <div class="quadrado2">
                     <i class="ph ph-code"></i>
-                    <P>Programação</P>
+                    <p>Programação</p>
                 </div>
                 <div class="quadrado3">
                     <i class="ph ph-chalkboard-teacher"></i>
-                    <P>Aulas</P>
+                    <p>Aulas</p>
                 </div>
             </div>
 
             <div class="numeros">
                 <div class="numeros1">
                     <h2>+500</h2>
-                    <P>Estudantes</P>
+                    <p>Estudantes</p>
                 </div>
                 <div class="numeros2">
                     <h2>+200</h2>
-                    <P>Serviços Ativos</P>
+                    <p>Serviços Ativos</p>
                 </div>
                 <div class="numeros3">
                     <h2>+1000</h2>
-                    <P>Conexões Realizadas</P>
+                    <p>Conexões Realizadas</p>
                 </div>
             </div>
         </div>
     </main>
+    <script type="module" src="/js/index.js"></script>
+    <script type="module" src="/js/header.js"></script>
 </body>
+
 </html>

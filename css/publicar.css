@@ -107,7 +107,7 @@
         min-width: 120px;
     }
 
-    button {
+    #publicar {
         padding: 12px;
         border: none;
         border-radius: 8px;
@@ -118,8 +118,8 @@
         transition: background-color 0.3s ease;
     }
 
-    button:hover {
-        background-color: #45a049;
+    #publicar:hover {
+        background-color: #1837b4;
     }
 
     .image-grid {

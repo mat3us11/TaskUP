@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/perfil.css">
-    <link rel="stylesheet"type="text/css"href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <title>Document</title>
 </head>
+
 <body>
-     <header>
+    <header>
         <div class="logo">
             <h3>task<span>UP</span></h3>
         </div>
 
         <div class="menu">
             <ul>
-                <li><a href="servicos.html">Serviços</a></li>
-                <li><a href="publicar.html">Publicar</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="servicos.html" id="link-servicos">Serviços</a></li>
+                <li><a href="publicar.html" id="link-publicar">Publicar</a></li>
+                <li id="user-area">
+                    <a href="login.html" id="loginLink">Login</a>
+                </li>
             </ul>
         </div>
     </header>
@@ -27,7 +32,6 @@
             <div class="img">
                 <img src="img/perfil.jpg" alt="FOTO">
 
-                <h3>Nome</h3>
             </div>
 
             <div class="info">
@@ -87,21 +91,24 @@
 
                 <div class="comentarios">
                     <div class="comentario1">
-                        <div class="star"><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i></div>
+                        <div class="star"><i class="ph ph-star"></i><i class="ph ph-star"></i><i
+                                class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i></div>
 
                         <h3>comentário</h3>
                         <h3>nome</h3>
                     </div>
 
                     <div class="comentario2">
-                        <div class="star"><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i></div>
+                        <div class="star"><i class="ph ph-star"></i><i class="ph ph-star"></i><i
+                                class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i></div>
 
                         <h3>comentário</h3>
                         <h3>nome</h3>
                     </div>
 
                     <div class="comentario3">
-                        <div class="star"><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i></div>
+                        <div class="star"><i class="ph ph-star"></i><i class="ph ph-star"></i><i
+                                class="ph ph-star"></i><i class="ph ph-star"></i><i class="ph ph-star"></i></div>
 
                         <h3>comentário</h3>
                         <h3>nome</h3>
@@ -110,5 +117,8 @@
             </div>
         </div>
     </div>
+    <script type="module" src="js/perfil.js"></script>
+    <script type="module" src="js/header.js"></script>
 </body>
+
 </html>

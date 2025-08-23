@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="css/publicar.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
-
-
     <title>Página inicial</title>
 </head>
 
@@ -20,9 +18,11 @@
 
         <div class="menu">
             <ul>
-                <li><a href="servicos.html">Serviços</a></li>
-                <li><a href="publicar.html">Publicar</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="servicos.html" id="link-servicos">Serviços</a></li>
+                <li><a href="publicar.html" id="link-publicar">Publicar</a></li>
+                <li id="user-area">
+                    <a href="login.html" id="loginLink">Login</a>
+                </li>
             </ul>
         </div>
     </header>
@@ -30,7 +30,7 @@
     <main>
         <div class="form-container">
             <h2>Publicar serviços</h2>
-            <form>
+            <form id="publicarForm">
                 <label for="titulo">Título</label>
                 <input type="text" id="titulo" placeholder="Exemplo: Desenvolvedor web">
 
@@ -57,20 +57,16 @@
                 </div>
 
                 <div class="image-grid" id="image-grid">
-                    <div class="image-slot add" id="slot-0">
-                        <input type="file" accept="image/*" id="upload-0">
-                        <label for="upload-0"><span>+</span></label>
-                    </div>
+                    <!-- O slot inicial será criado pelo JS -->
                 </div>
 
-
-
-                <button type="submit">Publicar</button>
+                <button id="publicar" type="submit">Publicar</button>
             </form>
         </div>
 
     </main>
-    <script src="js/publicar.js"></script>
+    <script type="module" src="js/publicar.js"></script>
+    <script type="module" src="js/header.js"></script>
 </body>
 
 </html>

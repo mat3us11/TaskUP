@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cadastro.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - TaskUp</title>
+  <link rel="stylesheet" href="css/cadastro.css">
 </head>
 <body>
-    <main>
-        <div class="principal">
-            <div class="esquerda">
-                <img src="img/college project-rafiki.svg" class="img">
-                
-            </div>
-            
-            <div class="direita">
-                <div class="dados">
-                    <h2>Crie sua conta</h2>
-                    <div class="campos">
-                        <input class="nome dados-preencher" type="text" placeholder="Digite seu nome">
-                        <input class="email dados-preencher" type="text" placeholder="Digite seu email">
-                        <input class="senha dados-preencher" type="text" placeholder="Digite sua senha">
-                        <button class="botao">Cadastrar</button>
-                    </div>
-                    <div class="baixo">
-                    <h3 class="npclogin1">Já possui conta? <h3 class="npclogin2">Login</h3></h3>
-                    </div>
-                </div>
-            </div>
+  <main>
+    <div class="principal">
+      <div class="esquerda">
+        <img src="img/college project-rafiki.svg" class="img" alt="Imagem">
+      </div>
+
+      <div class="direita">
+        <div class="dados">
+          <h2>Crie sua conta</h2>
+          <div class="campos">
+            <input class="nome dados-preencher" type="text" id="nome" placeholder="Digite seu nome" required>
+            <input class="email dados-preencher" type="email" id="email" placeholder="Digite seu email" required>
+            <input class="senha dados-preencher" type="password" id="password" placeholder="Digite sua senha" required>
+            <button class="botao" type="button">Cadastrar</button>
+          </div>
+          <div class="baixo">
+            <p class="npclogin1">Já possui uma conta? 
+              <a href="login.html"><span class="npclogin2">Login</span></a>
+            </p>
+          </div>
+          <p id="msg"></p>
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/cadastro.js"></script>
 </body>
 </html>
