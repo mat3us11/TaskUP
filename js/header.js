@@ -27,8 +27,8 @@ onAuthStateChanged(auth, (user) => {
 
     userArea.innerHTML = `
       <a href="perfil.html" class="user-link">
+      <span class="user-name"> Olá, ${nome}</span>
         <i class="ph ph-user"></i>
-        <span class="user-name">${nome}</span>
       </a>
       <button id="logoutBtn" class="botao-sair">Sair</button>
     `;

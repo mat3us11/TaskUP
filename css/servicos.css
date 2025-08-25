@@ -5,33 +5,48 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+  background-color: #f2f2f2;
+}
+
 header {
   width: 80%;
-  margin: 20px auto;
+  height: 120px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.logo a{
+  text-decoration: none;
+  color: black;
+}
+
 .logo h3 {
   font-size: 24px;
 }
+
 .logo span {
   color: #364fb2;
 }
 
 .menu ul {
   display: flex;
+  flex-direction: row;
   gap: 2rem;
-  list-style: none;
+  list-style-type: none;
 }
+
 .menu ul li a {
   text-decoration: none;
   color: black;
-  font-size: 18px;
-  transition: 0.3s;
+  cursor: pointer;
+  font-size: 20px;
 }
+
 .menu ul li a:hover {
+  transition: all 0.2s;
   color: #364fb2;
 }
 
