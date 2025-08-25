@@ -49,16 +49,14 @@ header{
     width: 80%;
     margin: auto;
     display: flex;
-    align-items: center;
 }
 
 .mainleft {
     display: flex;
-    width: 25%;
+    width: 20%;
     flex-direction: column;
-    height: 500px;
+    height: 700px;
     gap: 25px;
-    align-items: center;
     border-right: solid rgba(0, 0, 0, 0.212) 2px;
 }
 
@@ -69,9 +67,12 @@ header{
 }
 
 .img img {
-    width: 100%;
+    width: 70%;
     height: 200px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .img h3 {
@@ -135,6 +136,10 @@ header{
     background-color: rgb(17, 92, 255);
     color: white;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 80%;
 }
 
 .info button:hover {
@@ -231,14 +236,15 @@ header{
 
 .comentarios {
     display: flex;
-    width: 100%;
-    justify-content: space-around;
+    width: 91%;
+    justify-content: space-between;
+    margin: auto;
 }
 
 .comentarios .comentario1, .comentario2, .comentario3 {
     border: solid rgba(0, 0, 0, 0.158) 2px;
     padding: 20px;
-    width: 20%;
+    width: 36%;
     border-radius: 5px;
     height: 80%;
     display: flex;
