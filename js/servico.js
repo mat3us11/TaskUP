@@ -1,5 +1,12 @@
-import { db } from "./firebase.js";
+import { auth, db, storage } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+// Verifica se o usuário está logado
+onAuthStateChanged(auth, (user) => {
+  if (!user) window.location.href = "login.html";
+});
+
 
 const imgMain = document.getElementById("imagem-principal");
 const miniaturas = document.getElementById("miniaturas");
