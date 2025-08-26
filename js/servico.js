@@ -1,18 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA2Nr4gt15T9NITDm_-wwMo-8ZWjhYVfxc",
-  authDomain: "taskup-ef916.firebaseapp.com",
-  projectId: "taskup-ef916",
-  storageBucket: "taskup-ef916.firebasestorage.app",
-  messagingSenderId: "912665332450",
-  appId: "1:912665332450:web:ada344cbdf4e8928b72cbb",
-  measurementId: "G-PR8YZT3DSR"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+import { db } from "./firebase.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const imgMain = document.getElementById("imagem-principal");
 const miniaturas = document.getElementById("miniaturas");
@@ -25,6 +12,7 @@ const btnChat = document.getElementById("btn-chat");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 
+// Pega ID do serviço na URL
 const urlParams = new URLSearchParams(window.location.search);
 const servicoId = urlParams.get("id");
 
@@ -33,6 +21,7 @@ let currentIndex = 0;
 
 async function carregarServico() {
   if (!servicoId) return alert("Serviço não encontrado!");
+
   try {
     const docRef = doc(db, "servicos", servicoId);
     const docSnap = await getDoc(docRef);
@@ -41,6 +30,7 @@ async function carregarServico() {
 
     const s = docSnap.data();
 
+    // Preenche elementos da página
     tituloEl.textContent = s.titulo;
     precoEl.textContent = `R$ ${s.preco}`;
     categoriaEl.textContent = `Categoria: ${s.categoria}`;
@@ -80,7 +70,6 @@ function showImage(index) {
   });
 }
 
-
 prevBtn.addEventListener("click", () => showImage((currentIndex - 1 + imagens.length) % imagens.length));
 nextBtn.addEventListener("click", () => showImage((currentIndex + 1) % imagens.length));
 
@@ -88,5 +77,6 @@ btnChat.addEventListener("click", () => {
   const user = autorEl.textContent.replace("Publicado por: ", "");
   alert(`Abrir chat com ${user}`);
 });
+
 
 carregarServico();

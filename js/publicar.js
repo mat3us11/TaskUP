@@ -1,23 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-storage.js";
-
-// Configuração do Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyA2Nr4gt15T9NITDm_-wwMo-8ZWjhYVfxc",
-  authDomain: "taskup-ef916.firebaseapp.com",
-  projectId: "taskup-ef916",
-  storageBucket: "taskup-ef916.firebasestorage.app",
-  messagingSenderId: "912665332450",
-  appId: "1:912665332450:web:ada344cbdf4e8928b72cbb",
-  measurementId: "G-PR8YZT3DSR"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+import { auth, db, storage } from "./firebase.js"; // <-- usa as instâncias
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-storage.js";
 
 const form = document.querySelector("form");
 const grid = document.getElementById('image-grid');
@@ -27,6 +11,7 @@ const maxImages = 3;
 onAuthStateChanged(auth, (user) => {
   if (!user) window.location.href = "login.html";
 });
+
 
 // Envia formulário
 form.addEventListener("submit", async (e) => {

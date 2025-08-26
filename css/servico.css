@@ -2,56 +2,60 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 body {
-  background-color: #f2f2f2;
+  background-color: #f7f8fa;
+  color: #333;
 }
 
 header {
-  width: 80%;
-  height: 120px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+        width: 80%;
+        height: 120px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-.logo a{
-  text-decoration: none;
-  color: black;
-}
+    .logo a{
+        text-decoration: none;
+        color: black;
+    }
 
-.logo h3 {
-  font-size: 24px;
-}
+    .logo h3 {
+        font-size: 24px;
+    }
 
-.logo span {
-  color: #364fb2;
-}
+    .logo span {
+        color: #364fb2;
+    }
 
-.menu ul {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  list-style-type: none;
-}
+    .menu ul {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        list-style-type: none;
+    }
 
-.menu ul li a {
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-  font-size: 20px;
-}
+    .menu ul li a {
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+        font-size: 20px;
+    }
 
-.menu ul li a:hover {
-  transition: all 0.2s;
-  color: #364fb2;
-}
+    .menu ul li a:hover {
+        transition: all 0.2s;
+        color: #364fb2;
+    }
 
+
+/* ===== MAIN ===== */
 main {
-  width: 80%;
+  width: 90%;
+  max-width: 1400px;
   margin: 40px auto;
 }
 
@@ -59,15 +63,21 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
-  justify-content: center;
   background-color: #fff;
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  animation: fadeIn 0.4s ease-in-out;
 }
 
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* ===== GALERIA ===== */
 .galeria {
-  flex: 1 1 450px;
+  flex: 1 1 500px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -77,62 +87,64 @@ main {
 .imagem-principal {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 450px;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 14px;
   background-color: #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .imagem-principal img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* sem distorcer a imagem */
+  border-radius: 14px;
 }
 
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(54,79,178,0.7);
+  background-color: rgba(54,79,178,0.8);
   color: white;
   border: none;
   font-size: 28px;
-  padding: 10px 12px;
+  padding: 10px 14px;
   cursor: pointer;
   border-radius: 50%;
   z-index: 10;
   transition: 0.3s;
 }
 .arrow:hover {
-  background-color: rgba(54,79,178,0.9);
+  background-color: rgba(54,79,178,1);
 }
-.arrow.left {
-  left: 10px;
-}
-.arrow.right {
-  right: 10px;
-}
+.arrow.left { left: 12px; }
+.arrow.right { right: 12px; }
 
 .miniaturas {
   display: flex;
-  gap: 10px;
-  justify-content: flex-start;
+  gap: 12px;
   overflow-x: auto;
+  padding-bottom: 5px;
 }
 .miniaturas img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   border: 2px solid transparent;
   transition: 0.3s;
 }
-.miniaturas img.active, .miniaturas img:hover {
+.miniaturas img.active, 
+.miniaturas img:hover {
   border-color: #364fb2;
+  transform: scale(1.05);
 }
 
+/* ===== INFO ===== */
 .info-servico {
   flex: 1 1 400px;
   display: flex;
@@ -141,26 +153,25 @@ main {
 }
 
 .info-servico h1 {
-  color: #364fb2;
+  color: #222;
   font-size: 32px;
   font-weight: 700;
 }
 
 .info-servico .preco {
-  font-size: 24px;
-  color: #2b3a96;
+  font-size: 26px;
+  color: #364fb2;
   font-weight: bold;
 }
 
 .info-servico .categoria,
 .info-servico .autor {
   font-size: 16px;
-  color: #555;
-  font-weight: 500;
+  color: #666;
 }
 
 .info-servico .descricao {
-  font-size: 16px;
+  font-size: 17px;
   color: #333;
   line-height: 1.6;
 }
@@ -168,25 +179,32 @@ main {
 .chat-btn {
   margin-top: 20px;
   padding: 14px 0;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
   background-color: #364fb2;
   color: white;
   font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(54,79,178,0.3);
 }
 .chat-btn:hover {
   background-color: #2b3a96;
+  transform: translateY(-2px);
 }
 
-/* Mobile */
+/* ===== RESPONSIVO ===== */
 @media (max-width: 900px) {
   .detalhe-servico {
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
   }
   .imagem-principal {
-    height: 300px;
+    height: 320px;
+  }
+  .miniaturas img {
+    width: 70px;
+    height: 70px;
   }
 }

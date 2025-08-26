@@ -1,18 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA2Nr4gt15T9NITDm_-wwMo-8ZWjhYVfxc",
-  authDomain: "taskup-ef916.firebaseapp.com",
-  projectId: "taskup-ef916",
-  storageBucket: "taskup-ef916.firebasestorage.app",
-  messagingSenderId: "912665332450",
-  appId: "1:912665332450:web:ada344cbdf4e8928b72cbb",
-  measurementId: "G-PR8YZT3DSR"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+import { db } from "./firebase.js"; 
+import { getDocs, collection, query, orderBy } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const listaServicos = document.getElementById("lista-servicos");
 const inputPesquisa = document.getElementById("pesquisa");
@@ -48,7 +35,7 @@ function renderizarServicos(arrayServicos) {
     card.classList.add("servico-card");
 
     card.innerHTML = `
-      <img src="${s.imagens && s.imagens[0] ? s.imagens[0] : 'https://via.placeholder.com/300x180?text=Sem+Imagem'}" alt="Imagem">
+      <img src="${s.imagens?.[0] || 'https://via.placeholder.com/300x180?text=Sem+Imagem'}" alt="Imagem">
       <h3>${s.titulo}</h3>
       <p class="preco">R$ ${s.preco}</p>
       <p><strong>Categoria:</strong> ${s.categoria}</p>
