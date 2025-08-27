@@ -97,3 +97,17 @@ a{
 }
 .senha{background-image: url('../img/lock.png');}
 .email{background-image: url('../img/envelope-simple.png');}
+
+@media(max-width: 480px) {
+    .principal {
+        width: 90%;
+    }
+
+    .formulario input {
+        width: 100%;
+    }
+
+    .botao {
+        width: 100%;
+    }
+}

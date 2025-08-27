@@ -163,3 +163,25 @@ header {
   max-width: 48%;
   border-radius: 6px;
 }
+
+@media(max-width: 480px) {
+
+  .painel-servicos h1 {
+    font-size: 32px;
+  }
+  .filtros {
+    width: 100%;
+  }
+
+  .filtros input {
+    width: 40%;
+  }
+
+  .filtros select {
+    width: 40%;
+  }
+
+  .filtros button {
+    width: 20%;
+  }
+}
