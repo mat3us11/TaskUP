@@ -280,7 +280,7 @@ header {
   z-index: 100;
 }
 
-@media(max-width: 480px) {
+@media(max-width: 768px) {
 
   .painel-servicos h1 {
     font-size: 32px;
