@@ -21,6 +21,10 @@ form.addEventListener("submit", async (e) => {
   const descricao = document.getElementById("descricao").value.trim();
   const preco = document.getElementById("preco").value.trim();
   const categoria = document.getElementById("categoria").value;
+  const whatsapp = document.getElementById("whatsapp").value.trim();
+  const instagram = document.getElementById("instagram").value.trim();
+  const facebook = document.getElementById("facebook").value.trim();
+
 
   if (!titulo || !descricao || !preco || !categoria) {
     alert("Preencha todos os campos!");
@@ -49,6 +53,9 @@ form.addEventListener("submit", async (e) => {
       imagens: imageUrls,
       userId: user.uid,
       userName: user.displayName || user.email,
+      whatsapp,
+      instagram,
+      facebook,
       createdAt: serverTimestamp()
     });
 

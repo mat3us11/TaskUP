@@ -196,6 +196,15 @@ main {
   line-height: 1.6;
 }
 
+.contatos {
+  display: flex;
+  gap: 10px;
+}
+
+.contatos i {
+  font-size: 20px
+}
+
 .chat-btn {
   margin-top: 20px;
   padding: 14px 0;

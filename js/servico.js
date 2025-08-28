@@ -14,6 +14,7 @@ const autorEl = document.getElementById("autor");
 const btnChat = document.getElementById("btn-chat");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
+const contatosEl = document.getElementById("contatos");
 
 const urlParams = new URLSearchParams(window.location.search);
 const servicoId = urlParams.get("id");
@@ -42,7 +43,37 @@ async function carregarServico() {
     descricaoEl.textContent = servicoData.descricao;
     autorEl.textContent = `Publicado por: ${servicoData.userName || "Anônimo"}`;
 
+    if (servicoData.whatsapp) {
+  contatosEl.innerHTML += `
+    <p>
+      <a href="https://wa.me/55${servicoData.whatsapp}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+      </a>
+    </p>`;
+}
+
+if (servicoData.instagram) {
+  contatosEl.innerHTML += `
+    <p>
+      <a href="https://www.instagram.com/${servicoData.instagram}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+    <i class="fab fa-instagram" style="color:#E4405F;"></i>
+  </a>
+    </p>`;
+}
+
+if (servicoData.facebook) {
+  contatosEl.innerHTML += `
+    <p>
+      <a href="https://www.facebook.com/${servicoData.facebook}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+    <i class="fab fa-facebook" style="color:#1877F2;"></i>
+  </a>
+    </p>`;
+}
+
+
     imagens = servicoData.imagens || [];
+
+    
     renderSlideshow();
   } catch (err) {
     console.error(err);

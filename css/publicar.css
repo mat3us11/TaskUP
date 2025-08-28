@@ -131,8 +131,17 @@ textarea {
 
 .preco,
 .categoria {
+    display: flex;
+    flex-direction: column;
     flex: 1;
     min-width: 120px;
+    gap: 5px;
+}
+
+.social {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 #publicar {
