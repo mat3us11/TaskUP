@@ -2,55 +2,75 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 body {
-  background-color: #f7f8fa;
-  color: #333;
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f5f6fa, #e6ebf5);
+  min-height: 100vh;
+  padding-top: 120px; /* espaço para header fixo */
 }
 
+/* ===== HEADER ===== */
 header {
-        width: 80%;
-        height: 120px;
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
 
-    .logo a{
-        text-decoration: none;
-        color: black;
-    }
+.logo a {
+  text-decoration: none;
+  color: #000;
+}
 
-    .logo h3 {
-        font-size: 24px;
-    }
+.logo h3 {
+  font-size: 26px;
+  font-weight: bold;
+}
 
-    .logo span {
-        color: #364fb2;
-    }
+.logo span {
+  color: #364fb2;
+}
 
-    .menu ul {
-        display: flex;
-        flex-direction: row;
-        gap: 2rem;
-        list-style-type: none;
-    }
+.menu ul {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  list-style: none;
+}
 
-    .menu ul li a {
-        text-decoration: none;
-        color: black;
-        cursor: pointer;
-        font-size: 20px;
-    }
+.menu ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  position: relative;
+}
 
-    .menu ul li a:hover {
-        transition: all 0.2s;
-        color: #364fb2;
-    }
+.menu ul li a:hover {
+  color: #364fb2;
+}
 
+.menu ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #364fb2;
+  transition: width 0.3s ease;
+}
+
+.menu ul li a:hover::after {
+  width: 100%;
+}
 
 /* ===== MAIN ===== */
 main {

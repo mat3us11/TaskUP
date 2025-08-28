@@ -1,12 +1,8 @@
-import { auth, db, storage } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { db } from "./firebase.js";
+import { doc, getDoc, collection, query, where, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-// Verifica se o usuário está logado
-onAuthStateChanged(auth, (user) => {
-  if (!user) window.location.href = "login.html";
-});
-
+const auth = getAuth();
 
 const imgMain = document.getElementById("imagem-principal");
 const miniaturas = document.getElementById("miniaturas");
@@ -19,13 +15,16 @@ const btnChat = document.getElementById("btn-chat");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 
-// Pega ID do serviço na URL
 const urlParams = new URLSearchParams(window.location.search);
 const servicoId = urlParams.get("id");
 
 let imagens = [];
 let currentIndex = 0;
+let servicoData = null;
 
+// ---------------------------
+// Carrega serviço
+// ---------------------------
 async function carregarServico() {
   if (!servicoId) return alert("Serviço não encontrado!");
 
@@ -35,24 +34,25 @@ async function carregarServico() {
 
     if (!docSnap.exists()) return alert("Serviço não encontrado!");
 
-    const s = docSnap.data();
+    servicoData = docSnap.data();
 
-    // Preenche elementos da página
-    tituloEl.textContent = s.titulo;
-    precoEl.textContent = `R$ ${s.preco}`;
-    categoriaEl.textContent = `Categoria: ${s.categoria}`;
-    descricaoEl.textContent = s.descricao;
-    autorEl.textContent = `Publicado por: ${s.userName || "Anônimo"}`;
+    tituloEl.textContent = servicoData.titulo;
+    precoEl.textContent = `R$ ${servicoData.preco}`;
+    categoriaEl.textContent = `Categoria: ${servicoData.categoria}`;
+    descricaoEl.textContent = servicoData.descricao;
+    autorEl.textContent = `Publicado por: ${servicoData.userName || "Anônimo"}`;
 
-    imagens = s.imagens || [];
+    imagens = servicoData.imagens || [];
     renderSlideshow();
-
   } catch (err) {
     console.error(err);
     alert("Erro ao carregar serviço.");
   }
 }
 
+// ---------------------------
+// Slideshow de imagens
+// ---------------------------
 function renderSlideshow() {
   if (!imagens.length) {
     imgMain.innerHTML = "<p>Sem imagens</p>";
@@ -80,10 +80,59 @@ function showImage(index) {
 prevBtn.addEventListener("click", () => showImage((currentIndex - 1 + imagens.length) % imagens.length));
 nextBtn.addEventListener("click", () => showImage((currentIndex + 1) % imagens.length));
 
-btnChat.addEventListener("click", () => {
-  const user = autorEl.textContent.replace("Publicado por: ", "");
-  alert(`Abrir chat com ${user}`);
+// ---------------------------
+// Chat automático
+// ---------------------------
+async function iniciarOuAbrirChat(outroId, outroNome) {
+  const user = auth.currentUser;
+  if (!user) {
+    alert("Você precisa estar logado para iniciar um chat.");
+    return;
+  }
+
+  const chatsRef = collection(db, "chats");
+
+  // Verifica se já existe chat entre os dois
+  const q = query(chatsRef, where("participantesIds", "array-contains", user.uid));
+  const snapshot = await getDocs(q);
+
+  let chatId = null;
+
+  snapshot.forEach(docSnap => {
+    const chat = docSnap.data();
+    if (chat.participantesIds.includes(outroId)) {
+      chatId = docSnap.id;
+    }
+  });
+
+  // Se não existir, cria um novo chat
+  if (!chatId) {
+    const novoChatRef = doc(chatsRef); // ID gerado automaticamente
+    await setDoc(novoChatRef, {
+      participantesIds: [user.uid, outroId],
+      participantesInfo: [
+        { uid: user.uid, nome: user.displayName || "Você" },
+        { uid: outroId, nome: outroNome }
+      ],
+      lastMessage: "",
+      lastTimestamp: null
+    });
+    chatId = novoChatRef.id;
+  }
+
+  // Redireciona para o chat
+  window.location.href = `chat.html?chatId=${chatId}&contratado=${encodeURIComponent(outroNome)}&contratadoId=${outroId}`;
+}
+
+// Botão de chat
+btnChat.addEventListener("click", async () => {
+  const contratadoId = servicoData.userId;
+  const contratadoNome = servicoData.userName || "Anônimo";
+
+  await iniciarOuAbrirChat(contratadoId, contratadoNome);
 });
 
-
+// ---------------------------
+// Inicialização
+// ---------------------------
 carregarServico();

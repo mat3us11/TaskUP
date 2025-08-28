@@ -39,10 +39,11 @@ onAuthStateChanged(auth, async (user) => {
   nomeUsuario.textContent = user.displayName || "Sem nome definido";
   fotoPerfil.src = user.photoURL || "img/perfil.jpg";
 
+  // Garante que o documento do usuário exista no Firestore
   const userRef = doc(db, "usuarios", user.uid);
   const userDoc = await getDoc(userRef);
   if (!userDoc.exists()) {
-    await setDoc(userRef, { curso: "" }, { merge: true });
+    await setDoc(userRef, { curso: "", photoURL: user.photoURL || "img/perfil.jpg" }, { merge: true });
   }
   cursoUsuario.textContent = userDoc.exists() ? userDoc.data().curso || "Não informado" : "";
 
@@ -107,6 +108,7 @@ function calcularMedia(avaliacoes) {
   return (soma / avaliacoes.length).toFixed(1);
 }
 
+// Atualização de foto pelo botão
 btnEditarFoto.addEventListener("click", () => uploadFoto.click());
 uploadFoto.addEventListener("change", async (e) => {
   const file = e.target.files[0];
@@ -118,10 +120,12 @@ uploadFoto.addEventListener("change", async (e) => {
   const url = await getDownloadURL(storageRef);
 
   await updateProfile(user, { photoURL: url });
+  await setDoc(doc(db, "usuarios", user.uid), { photoURL: url }, { merge: true }); // <- Salva no Firestore também
   fotoPerfil.src = url;
   alert("Foto atualizada!");
 });
 
+// Abrir modal de edição de perfil
 btnEditarPerfil.onclick = async () => {
   const user = auth.currentUser;
   nomeInput.value = user.displayName || "";
@@ -129,9 +133,11 @@ btnEditarPerfil.onclick = async () => {
   cursoInput.value = userDoc.exists() ? userDoc.data().curso || "" : "";
   modalPerfil.style.display = "block";
 };
+
 spanClosePerfil.onclick = () => modalPerfil.style.display = "none";
 window.onclick = (e) => { if (e.target == modalPerfil) modalPerfil.style.display = "none"; };
 
+// Salvar alterações do perfil
 btnSalvarPerfil.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) return;
@@ -148,7 +154,10 @@ btnSalvarPerfil.addEventListener("click", async () => {
   }
 
   await updateProfile(user, { displayName: novoNome, photoURL: novoFotoURL });
-  await setDoc(doc(db, "usuarios", user.uid), { curso: novoCurso }, { merge: true });
+  await setDoc(doc(db, "usuarios", user.uid), {
+    curso: novoCurso,
+    photoURL: novoFotoURL 
+  }, { merge: true });
 
   nomeUsuario.textContent = novoNome;
   cursoUsuario.textContent = novoCurso;
@@ -158,9 +167,11 @@ btnSalvarPerfil.addEventListener("click", async () => {
   modalPerfil.style.display = "none";
 });
 
+// Modal serviços
 btnCloseServico.onclick = () => modalServico.style.display = "none";
 window.onclick = (e) => { if (e.target == modalServico) modalServico.style.display = "none"; }
 
+// Salvar serviço editado
 btnSalvarServico.addEventListener("click", async () => {
   if (!servicoAtualId) return;
 
@@ -184,7 +195,6 @@ btnSalvarServico.addEventListener("click", async () => {
   const servicoRef = doc(db, "servicos", servicoAtualId);
   const docSnap = await getDoc(servicoRef);
   const avaliacoes = docSnap.exists() && docSnap.data().avaliacoes ? docSnap.data().avaliacoes : [];
-
 
   if (novaAvaliacao >= 1 && novaAvaliacao <= 5) {
     avaliacoes.push({ userId: auth.currentUser.uid, nota: novaAvaliacao });
