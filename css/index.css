@@ -248,42 +248,150 @@ footer a:hover {
     font-size: 18px;
 }
 
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #364fb2;
+}
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 98;
+}
+
+/* Menu lateral */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 15px rgba(0,0,0,0.2);
+  padding: 20px;
+  z-index: 9999;
+  transition: right 0.3s ease;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #000;
+}
+
+.mobile-menu a:hover {
+  color: #364fb2;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #364fb2;
+  margin-left: auto;
+  display: block;
+}
+
+.menu-overlay.active {
+  display: block;
+}
+.mobile-menu.active {
+  right: 0;
+}
+
+@media(max-width: 768px) {
+  .menu {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-menu ul{
+    margin-top: 60px;
+  }
+}
+
+/* Quando o menu abrir, esconde o hambúrguer */
+.hamburger.hidden {
+  display: none;
+}
+
+/* Deixa o botão X fixo no canto */
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #364fb2;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+}
+
+
 @media(max-width: 480px) {
     .container {
-        display: flex;
         flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        width: 82%;
+        margin-bottom: 40px;
     }
 
     .texto {
         width: 100%;
         display: flex;
-    }
+     }
 
+     .texto h1{
+        font-size: large;
+     }
+
+     .texto p{
+        font-size: medium;
+     }
     .botoes {
-        width: 90%;
+        width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        gap: 3rem;
     }
 
-    .botao-azul {
-        width: 130%;
-    }
-
+    .botao-azul,
     .botao-branco {
-        width: 130%;
+        width: 100%;
     }
 
     .notebook-img {
         width: 100%;
-        height: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .notebook-img img {
+        max-width: 85%;
+        height: auto;
     }
 
     .icones {
-        display: flex;
-        justify-content: space-around;
         width: 100%;
+        justify-content: space-around;
+        gap: 10px;
     }
 
     .icone1 p, .icone2 p, .icone3 p {
@@ -291,41 +399,51 @@ footer a:hover {
     }
 
     .quadrados {
-        display: flex;
         width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
-    .funcionalidades .quadrado1 , .quadrado2 , .quadrado3 {
-        width: 20%;
+    .funcionalidades .quadrado1, 
+    .funcionalidades .quadrado2, 
+    .funcionalidades .quadrado3 {
+        width: 28%;
+        min-width: 90px;
         padding: 15px;
     }
 
     .numeros {
         width: 100%;
-    }
-
-    .funcionalidades  .numeros1 , .numeros2 , .numeros3 {
-        width: 20%;
-        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
         justify-content: center;
-        align-items: center;
-
     }
 
-    .numeros  .numeros1 p, .numeros2 p, .numeros3 p {
+    .funcionalidades .numeros1, 
+    .funcionalidades .numeros2, 
+    .funcionalidades .numeros3 {
+        width: auto;
+        min-width: 80px;
+        padding: 15px;
+    }
+
+    .numeros .numeros1 p, 
+    .numeros2 p, 
+    .numeros3 p {
         font-size: 10px;
-        display: flex;
-        align-items: center;
+        text-align: center;
     }
 
     .funcionalidades .numeros3 p {
-        width: 100px;
+        width: auto;
     }
 
     footer {
         display: flex;
-        width: 100%;
-        gap: 5rem;
+        gap: 20px;
+        padding: 10px 0;
+        justify-content: space-around;
+        height: auto;
     }
-
 }

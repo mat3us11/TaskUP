@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+    <header>
+    <div class="logo">
+      <a href="index.html">
+        <h3>task<span>UP</span></h3>
+      </a>
+    </div>
+
+    <div class="menu">
+      <ul>
+        <li><a href="painel-chat.html" id="link-servicos">Chat</a></li>
+        <li><a href="servicos.html" id="link-servicos">Serviços</a></li>
+        <li><a href="publicar.html" id="link-publicar">Publicar</a></li>
+        <li id="user-area">
+          <a href="login.html" id="loginLink">Login</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Botão hamburguer -->
+    <div class="hamburger" id="hamburger">☰</div>
+  </header>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="anuncio-info">
+        <img id="anuncio-img" src="" alt="Imagem do anúncio">
+        <div>
+          <h2 id="chat-com">Chat com ...</h2>
+          <p id="anuncio-titulo"></p>
+          <p id="anuncio-preco"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="mensagens" class="mensagens"></div>
+
+    <div class="input-area">
+      <input type="text" id="msgInput" placeholder="Digite sua mensagem...">
+      <button id="btnEnviar">Enviar</button>
+    </div>
+  </div>
+
+   <!-- Overlay e menu mobile -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" id="closeMenuBtn">×</button>
+    <ul>
+      <li><a href="painel-chat.html">Chat</a></li>
+      <li><a href="servicos.html">Serviços</a></li>
+      <li><a href="publicar.html">Publicar</a></li>
+      <li id="mobileUserArea">
+        <a href="login.html" id="mobileLoginLink">Login</a>
+      </li>
+    </ul>
+  </nav>
+
+  <script type="module" src="/js/chat.js"></script>
+  <script type="module" src="/js/header.js"></script>
+</body>
+</html>

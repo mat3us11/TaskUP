@@ -1,0 +1,246 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f5f6fa, #e6ebf5);
+  min-height: 100vh;
+  padding-top: 120px; /* espaço para header fixo */
+}
+
+/* ===== HEADER ===== */
+header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #000;
+}
+
+.logo h3 {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #364fb2;
+}
+
+.menu ul {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  list-style: none;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  position: relative;
+}
+
+.menu ul li a:hover {
+  color: #364fb2;
+}
+
+.menu ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #364fb2;
+  transition: width 0.3s ease;
+}
+
+.menu ul li a:hover::after {
+  width: 100%;
+}
+
+/* CHAT */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  height: 90vh;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.chat-header {
+  padding: 10px;
+  background: #364fb2;
+  color: #fff;
+}
+
+.anuncio-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.anuncio-info img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.anuncio-info h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.anuncio-info p {
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+.mensagens {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #e5ddd5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mensagem {
+  max-width: 70%;
+  padding: 8px 12px;
+  border-radius: 15px;
+  word-wrap: break-word;
+}
+
+.mensagem.enviada {
+  background: #dcf8c6;
+  align-self: flex-end;
+}
+
+.mensagem.recebida {
+  background: #fff;
+  align-self: flex-start;
+}
+
+.input-area {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.input-area button {
+  padding: 0 20px;
+  background: #364fb2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.input-area button:hover {
+  background: #2b3a91;
+}
+
+/* HAMBURGUER E MENU MOBILE */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #364fb2;
+}
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 98;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 15px rgba(0,0,0,0.2);
+  padding: 20px;
+  z-index: 9999;
+  transition: right 0.3s ease;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 60px;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #000;
+}
+
+.mobile-menu a:hover {
+  color: #364fb2;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #364fb2;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+}
+
+.menu-overlay.active {
+  display: block;
+}
+.mobile-menu.active {
+  right: 0;
+}
+
+@media(max-width: 768px) {
+  .menu {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+  }
+}

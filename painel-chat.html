@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalhes do Serviço</title>
-  <link rel="stylesheet" href="css/servico.css">
+  <title>Painel de Chats</title>
+  <link rel="stylesheet" href="/css/painel-chat.css">
 </head>
 <body>
-
-<header>
+   <header>
         <div class="logo">
             <a href="index.html"><h3>task<span>UP</span></h3></a>
         </div>
@@ -25,31 +24,14 @@
         </div>
         <div class="hamburger" id="hamburger">☰</div>
     </header>
-
-<main>
-  <div class="detalhe-servico">
-
-    <div class="galeria">
-      <div class="imagem-principal" id="imagem-principal">
-        <button class="arrow left" id="prev">&#10094;</button>
-        <button class="arrow right" id="next">&#10095;</button>
-      </div>
-      <div class="miniaturas" id="miniaturas"></div>
+  <div class="painel-container">
+    <h1>💬 Seus Chats</h1>
+    <div id="lista-chats" class="lista-chats">
+      <!-- Chats carregados pelo JS -->
     </div>
-
-    <div class="info-servico">
-      <h1 id="titulo">Título do Serviço</h1>
-      <p class="preco" id="preco">R$ 0,00</p>
-      <p class="categoria" id="categoria">Categoria</p>
-      <p class="descricao" id="descricao">Descrição completa do serviço.</p>
-      <p class="autor" id="autor">Publicado por: Usuário</p>
-      <button id="btn-chat" class="chat-btn">💬 Chat com o autor</button>
-    </div>
-
   </div>
-</main>
 
-<!-- Overlay e menu mobile -->
+  <!-- Overlay e menu mobile -->
   <div class="menu-overlay" id="menuOverlay"></div>
 
   <nav class="mobile-menu" id="mobileMenu">
@@ -64,7 +46,8 @@
     </ul>
   </nav>
 
-<script type="module" src="js/servico.js"></script>
-<script type="module" src="js/header.js"></script>
+  <script type="module" src="/js/chatPanel.js"></script>
+  <script type="module" src="/js/header.js"></script>
+
 </body>
 </html>
