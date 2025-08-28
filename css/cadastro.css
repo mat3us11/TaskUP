@@ -99,7 +99,7 @@ h2{
   height: auto;
 }
 
-@media(max-width: 480px) {
+@media(max-width: 768px) {
     .principal {
         display: flex;
         flex-direction: column;

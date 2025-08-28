@@ -98,7 +98,7 @@ a{
 .senha{background-image: url('../img/lock.png');}
 .email{background-image: url('../img/envelope-simple.png');}
 
-@media(max-width: 480px) {
+@media(max-width: 768px) {
     .principal {
         width: 90%;
     }
