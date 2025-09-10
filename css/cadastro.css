@@ -17,7 +17,7 @@ main{
     width: 70vw;
     border-radius: 20px;
     gap: 5vw;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.116);
+    box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.253);
 }
 .esquerda{
     background-color: #4d92f8;
@@ -25,7 +25,7 @@ main{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-radius: 11px;
+    border-radius: 11px 0px 0px 11px;
     width: 35vw;
     height: 90vh;
 }
@@ -40,7 +40,6 @@ main{
     border-radius: 11px;
     width: 25vw;
     height: 70vh;
-    box-shadow: -30px 30px 130px 60px rgba(0, 0, 0, 0.253);
 }
 .dados{
     display: flex;
