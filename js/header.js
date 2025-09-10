@@ -51,14 +51,14 @@ onAuthStateChanged(auth, (user) => {
           <span class="user-name"> Olá, ${nome}</span>
           <i class="ph ph-user"></i>
         </a>
-        <button id="logoutBtn" class="botao-sair">Sair</button>
       `;
-      const logoutBtn = document.getElementById("logoutBtn");
+    }
+
+    const logoutBtn = document.getElementById("logoutBtn");
       logoutBtn?.addEventListener("click", async () => {
         await signOut(auth);
         window.location.href = "login.html";
       });
-    }
 
     // Área mobile
     if (mobileUserArea) {
@@ -67,14 +67,7 @@ onAuthStateChanged(auth, (user) => {
           <span class="user-name"> Olá, ${nome}</span>
           <i class="ph ph-user"></i>
         </a>
-        <a href="#" id="mobileLogoutBtn" class="botao-sair">Sair</a>
       `;
-      const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
-      mobileLogoutBtn?.addEventListener("click", async (e) => {
-        e.preventDefault();
-        await signOut(auth);
-        window.location.href = "login.html";
-      });
     }
 
   } else {
