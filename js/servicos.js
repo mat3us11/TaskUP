@@ -41,7 +41,7 @@ function renderizarServicos(arrayServicos) {
     card.classList.add("servico-card");
 
     card.innerHTML = `
-      <img src="${s.imagens?.[0] || 'https://via.placeholder.com/300x180?text=Sem+Imagem'}" alt="Imagem">
+      <img src="${s.imagens?.[0] || 'img/semImagem.jpg'}" alt="Imagem">
       <h3>${s.titulo}</h3>
       <p class="preco">R$ ${s.preco}</p>
       <p><strong>Categoria:</strong> ${s.categoria}</p>

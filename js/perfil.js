@@ -37,7 +37,7 @@ onAuthStateChanged(auth, async (user) => {
 
   emailUsuario.textContent = user.email;
   nomeUsuario.textContent = user.displayName || "Sem nome definido";
-  fotoPerfil.src = user.photoURL || "img/perfil.jpg";
+  fotoPerfil.src = user.photoURL || "img/perfilPadrao.webp";
 
   // Garante que o documento do usuário exista no Firestore
   const userRef = doc(db, "usuarios", user.uid);
@@ -62,7 +62,7 @@ async function carregarServicos(userId) {
     const card = document.createElement("div");
     card.classList.add("servico-card");
     card.innerHTML = `
-      <img src="${data.imagens?.[0] || 'img/no-image.png'}" alt="Serviço">
+      <img src="${data.imagens?.[0] || 'img/semImagem.jpg'}" alt="Serviço">
       <h4>${data.titulo}</h4>
       <p>${data.descricao}</p>
       <p><strong>R$ ${data.preco}</strong></p>

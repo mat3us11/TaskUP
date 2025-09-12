@@ -86,7 +86,7 @@ if (servicoData.facebook) {
 // ---------------------------
 function renderSlideshow() {
   if (!imagens.length) {
-    imgMain.innerHTML = "<p>Sem imagens</p>";
+    imgMain.innerHTML = '<img src="img/semImagem.jpg">';
     return;
   }
   miniaturas.innerHTML = "";
