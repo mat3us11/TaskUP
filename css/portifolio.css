@@ -23,7 +23,7 @@ main{
     
     width: 30vw;
     height: 90vh;
-    background-color: red;
+    /* background-color: red; */
     box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.253);
     border-radius: 10px;
 }
@@ -53,8 +53,9 @@ main{
 .campo-descricao{
     height: 150px;
     width: 300px;
-    background-color: wheat;
+    background-color: rgb(182, 182, 182);
     border-radius: 7px;
+    margin: 20px;
 }
 .container{
     height: 85vh;
@@ -69,23 +70,26 @@ main{
     margin: 10px;
     height: 120px;
     width: 500px;
-    background-color: rgb(255, 255, 255);
     border-radius: 7px;
-   
+    padding: 10px;
+   transition: border 0.5s ease, background-color 0.4s ease; 
     /* border: 3px solid rgba(0, 0, 255, 0.37); */
     box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.11);
+}
+.classe-linha:hover{
+    background-color: rgb(182, 205, 248);
 }
 .container::-webkit-scrollbar-button {
   display: none;  
 }
 .container::-webkit-scrollbar {
     
-    width: 25px;              /* largura da barra */
+    width: 25px;              
     background-color: rgb(187, 187, 187);
     border-radius: 8px;
 }
 .container::-webkit-scrollbar-thumb {
-  background: #7679ff;         /* parte que arrasta */
+  background: #8a8cff;        
   border-radius: 10px;
 }
 input:disabled, textarea:disabled {
@@ -111,7 +115,7 @@ input:disabled, textarea:disabled {
 }
 
 .editar:active {
-    background-color: rgb(179, 183, 236); 
+    background-color: rgb(188, 192, 243); 
 }
 .linha-de-cima{
     display: flex;
@@ -119,5 +123,21 @@ input:disabled, textarea:disabled {
     justify-content:space-between;
     
 }
-.campo{ border: 1px solid transparent; height: 70px; width: 35vw;}
-.campo:active{ border: 1px solid transparent; height: 70px; width: 35vw;}
+.campo {
+    height: 70px;
+    width: 35vw;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+    text-align: left;
+    transition: border-color 0.5s ease;
+}
+.campo:focus {
+    border-color: rgb(132, 118, 207);
+}
+ 
+.titulo{
+    color: rgba(0, 0, 255, 0.644);
+}
