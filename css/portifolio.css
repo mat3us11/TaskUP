@@ -1,0 +1,123 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap :3vw;
+}
+.esquerda{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 30vw;
+    height: 90vh;
+    background-color: red;
+    box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.253);
+    border-radius: 10px;
+}
+.direita{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 45vw;
+    height: 90vh;
+    margin: 0;
+    background-color: white;
+    box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.253);
+     border-radius: 10px;
+   
+
+}
+.usuario-perfil{
+    height: 160px;
+    width: 160px;
+    border-style:outset;
+    border-radius: 100%;
+    border-width: 6px;
+    padding: 30px;
+    border-color: black;
+}
+.campo-descricao{
+    height: 150px;
+    width: 300px;
+    background-color: wheat;
+    border-radius: 7px;
+}
+.container{
+    height: 85vh;
+    width: 42vw;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+}
+.classe-linha{
+    margin: 10px;
+    height: 120px;
+    width: 500px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 7px;
+   
+    /* border: 3px solid rgba(0, 0, 255, 0.37); */
+    box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.11);
+}
+.container::-webkit-scrollbar-button {
+  display: none;  
+}
+.container::-webkit-scrollbar {
+    
+    width: 25px;              /* largura da barra */
+    background-color: rgb(187, 187, 187);
+    border-radius: 8px;
+}
+.container::-webkit-scrollbar-thumb {
+  background: #7679ff;         /* parte que arrasta */
+  border-radius: 10px;
+}
+input:disabled, textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.editar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid transparent; 
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+
+    transition: border 0.5s ease, background-color 0.2s ease; 
+}
+
+.editar:hover {
+    border-color: rgba(0, 0, 0, 0.747); 
+    background-color: #f0f0f0;          
+}
+
+.editar:active {
+    background-color: rgb(179, 183, 236); 
+}
+.linha-de-cima{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    
+}
+.campo{ border: 1px solid transparent; height: 70px; width: 35vw;}
+.campo:active{ border: 1px solid transparent; height: 70px; width: 35vw;}
