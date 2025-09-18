@@ -289,7 +289,7 @@ header {
 @media(max-width: 768px) {
   body {
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   /* MENU */
@@ -303,7 +303,7 @@ header {
   /* CHAT */
   .chat-container {
     width: 95%;
-    height: calc(100vh - 80px);
+    height: calc(100dvh - 80px);
     margin: 80px auto 0;
     border-radius: 15px;
     max-width: 100vw;
@@ -331,6 +331,7 @@ header {
   .mensagens {
     padding: 15px;
     gap: 8px;
+    padding-bottom: 70px;
   }
 
   .mensagem {
@@ -339,15 +340,23 @@ header {
     padding: 10px 14px;
   }
 
+  .input-area {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+  }
+
   .mensagem.enviada::after,
   .mensagem.recebida::after {
     width: 10px;
-    height: 10px;
+    height: 10px; 
   }
 
   .input-area input,
   .input-area button {
     font-size: 14px;
     padding: 10px 12px;
-  }
+  } 
 }
