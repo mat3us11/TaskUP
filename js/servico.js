@@ -19,6 +19,17 @@ const contatosEl = document.getElementById("contatos");
 const urlParams = new URLSearchParams(window.location.search);
 const servicoId = urlParams.get("id");
 
+const categoriasMap = {
+  programacao: "Programação",
+  design: "Design",
+  edicao: "Edição",
+  musica: "Música",
+  reforco: "Aulas e Reforço Escolar",
+  fotografia: "Fotografia e Vídeo",
+  artesanato: "Artesanato e Personalizados",
+  tecnlogia: "Tecnologia e Suporte Técnico"
+};
+
 let imagens = [];
 let currentIndex = 0;
 let servicoData = null;
@@ -39,7 +50,7 @@ async function carregarServico() {
 
     tituloEl.textContent = servicoData.titulo;
     precoEl.textContent = `R$ ${servicoData.preco}`;
-    categoriaEl.textContent = `Categoria: ${servicoData.categoria}`;
+    categoriaEl.textContent = `Categoria: ${categoriasMap[servicoData.categoria] || servicoData.categoria}`;
     descricaoEl.textContent = servicoData.descricao;
     autorEl.textContent = `Publicado por: ${servicoData.userName || "Anônimo"}`;
 
