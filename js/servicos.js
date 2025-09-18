@@ -14,6 +14,17 @@ const btnFiltrar = document.getElementById("btn-filtrar");
 
 let servicos = [];
 
+const categoriasMap = {
+  programacao: "Programação",
+  design: "Design",
+  edicao: "Edição",
+  musica: "Música",
+  reforco: "Aulas e Reforço Escolar",
+  fotografia: "Fotografia e Vídeo",
+  artesanato: "Artesanato e Personalizados",
+  tecnlogia: "Tecnologia e Suporte Técnico"
+};
+
 async function carregarServicos() {
   listaServicos.innerHTML = "<p>Carregando serviços...</p>";
   try {
@@ -44,7 +55,7 @@ function renderizarServicos(arrayServicos) {
       <img src="${s.imagens?.[0] || 'img/semImagem.jpg'}" alt="Imagem">
       <h3>${s.titulo}</h3>
       <p class="preco">R$ ${s.preco}</p>
-      <p><strong>Categoria:</strong> ${s.categoria}</p>
+      <p><strong>Categoria:</strong> ${categoriasMap[s.categoria] || s.categoria}</p>
       <p><strong>Autor:</strong> ${s.userName || "Anônimo"}</p>
       <button onclick="verDetalhes('${s.id}')">Ver Detalhes</button>
     `;
