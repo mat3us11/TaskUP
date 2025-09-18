@@ -25,7 +25,7 @@ const mensagensRef = collection(db, "chats", chatId, "mensagens");
 // Carregar informações do anúncio + foto do contratado
 // ---------------------------
 async function carregarAnuncio() {
-  let fotoUrl = "./img/perfilPadrao.jpg";
+  let fotoUrl = "./img/perfilPadrao.webp";
 
   if (contratadoId) {
     const userDoc = await getDoc(doc(db, "usuarios", contratadoId));

@@ -26,8 +26,6 @@ const precoInput = document.getElementById("precoServicoInput");
 const categoriaInput = document.getElementById("categoriaServicoInput");
 const imagensInput = document.getElementById("imagensServicoInput");
 const btnSalvarServico = document.getElementById("salvarServico");
-const avaliacaoInput = document.getElementById("avaliacaoServicoInput");
-const mediaAvaliacoesEl = document.getElementById("mediaAvaliacoes");
 
 let servicoAtualId = null;
 let imagensAtual = [];
@@ -68,7 +66,6 @@ async function carregarServicos(userId) {
       <p><strong>R$ ${data.preco}</strong></p>
       <button class="btn-editar" data-id="${docSnap.id}">Editar</button>
       <button class="btn-excluir" data-id="${docSnap.id}">Excluir</button>
-      <p class="media-avaliacao">Média avaliação: ${calcularMedia(data.avaliacoes)}</p>
     `;
     meusServicos.appendChild(card);
   });
@@ -86,7 +83,6 @@ async function carregarServicos(userId) {
       precoInput.value = data.preco;
       categoriaInput.value = data.categoria;
       imagensAtual = data.imagens || [];
-      mediaAvaliacoesEl.textContent = `Média avaliação: ${calcularMedia(data.avaliacoes)}`;
 
       modalServico.style.display = "block";
     });
@@ -102,11 +98,6 @@ async function carregarServicos(userId) {
   });
 }
 
-function calcularMedia(avaliacoes) {
-  if (!avaliacoes || avaliacoes.length === 0) return "Sem avaliações";
-  const soma = avaliacoes.reduce((acc, a) => acc + a.nota, 0);
-  return (soma / avaliacoes.length).toFixed(1);
-}
 
 // Atualização de foto pelo botão
 btnEditarFoto.addEventListener("click", () => uploadFoto.click());
@@ -179,7 +170,6 @@ btnSalvarServico.addEventListener("click", async () => {
   const novaDescricao = descricaoInput.value.trim();
   const novoPreco = precoInput.value.trim();
   const novaCategoria = categoriaInput.value.trim();
-  const novaAvaliacao = parseInt(avaliacaoInput.value);
 
   if (imagensInput.files.length > 0) {
     imagensAtual = [];
@@ -194,11 +184,7 @@ btnSalvarServico.addEventListener("click", async () => {
 
   const servicoRef = doc(db, "servicos", servicoAtualId);
   const docSnap = await getDoc(servicoRef);
-  const avaliacoes = docSnap.exists() && docSnap.data().avaliacoes ? docSnap.data().avaliacoes : [];
 
-  if (novaAvaliacao >= 1 && novaAvaliacao <= 5) {
-    avaliacoes.push({ userId: auth.currentUser.uid, nota: novaAvaliacao });
-  }
 
   const updateData = {
     titulo: novoTitulo,
@@ -206,7 +192,6 @@ btnSalvarServico.addEventListener("click", async () => {
     preco: novoPreco,
     categoria: novaCategoria,
     imagens: imagensAtual,
-    avaliacoes: avaliacoes
   };
 
   await updateDoc(servicoRef, updateData);
