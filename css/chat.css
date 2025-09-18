@@ -133,8 +133,8 @@ header {
   max-width: 75%;
   padding: 12px 16px;
   border-radius: 18px;
-  word-wrap: break-word;
-  position: relative;
+  display: inline-block; /* garante que cada bolha ocupe seu espaço */
+  word-break: break-word; /* quebra palavras longas */
   font-size: 15px;
   line-height: 1.4;
   animation: fadeInUp 0.25s ease;
