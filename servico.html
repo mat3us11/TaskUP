@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,55 +8,73 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>Detalhes do Serviço</title>
   <link rel="stylesheet" href="css/servico.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
 </head>
+
 <body>
 
-<header>
-        <div class="logo">
-            <a href="index.html"><h3>task<span>UP</span></h3></a>
-        </div>
-
-        <div class="menu">
-            <ul>
-                <li><a href="painel-chat.html" id="link-servicos">Chat</a></li>
-                <li><a href="servicos.html" id="link-servicos">Serviços</a></li>
-                <li><a href="publicar.html" id="link-publicar">Publicar</a></li>
-                <li id="user-area">
-                    <a href="login.html" id="loginLink">Login</a>
-                </li>
-            </ul>
-        </div>
-        <div class="hamburger" id="hamburger">☰</div>
-    </header>
-
-<main>
-  <div class="detalhe-servico">
-
-    <div class="galeria">
-      <div class="imagem-principal" id="imagem-principal">
-        <button class="arrow left" id="prev">&#10094;</button>
-        <button class="arrow right" id="next">&#10095;</button>
-      </div>
-      <div class="miniaturas" id="miniaturas"></div>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <h3>task<span>UP</span></h3>
+      </a>
     </div>
 
-    <div class="info-servico">
-      <h1 id="titulo">Título do Serviço</h1>
-      <p class="preco" id="preco">R$ 0,00</p>
-      <p class="categoria" id="categoria">Categoria</p>
-      <p class="descricao" id="descricao">Descrição completa do serviço.</p>
-      <p class="autor" id="autor">Publicado por: Usuário</p>
-      <p class="contatos "id="contatos">Formas de contato:</p>
-        
+    <div class="menu">
+      <ul>
+        <li><a href="painel-chat.html" id="link-servicos">Chat</a></li>
+        <li><a href="servicos.html" id="link-servicos">Serviços</a></li>
+        <li><a href="publicar.html" id="link-publicar">Publicar</a></li>
+        <li id="user-area">
+          <a href="login.html" id="loginLink">Login</a>
+        </li>
+      </ul>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+  </header>
+
+  <main>
+    <div class="detalhe-servico">
+
+      <div class="galeria">
+        <div class="imagem-principal" id="imagem-principal">
+          <button class="arrow left" id="prev">&#10094;</button>
+          <button class="arrow right" id="next">&#10095;</button>
+        </div>
+        <div class="miniaturas" id="miniaturas"></div>
+      </div>
+
+      <div class="info-servico">
+        <h1 id="titulo">Título do Serviço</h1>
+        <p class="preco" id="preco">R$ 0,00</p>
+        <p class="categoria" id="categoria">Categoria</p>
+        <p class="descricao" id="descricao">Descrição completa do serviço.</p>
+        <p class="autor" id="autor">Publicado por: Usuário</p>
+        <p class="contatos " id="contatos">Formas de contato:</p>
+
         <button id="btn-chat" class="chat-btn">💬 Chat com o autor</button>
 
-        <div class="avaliacao"></div>
+        <h3>Avalie este serviço:</h3>
+        <div class="avaliacao">
+          <div class="rating" id="starRating">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+          <div class="comentario">
+            <textarea type="text" placeholder="Deixe um comentário sobre o serviço"></textarea>
+            <i class="ph ph-paper-plane-right"></i>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </main>
 
-  </div>
-</main>
-
-<!-- Overlay e menu mobile -->
+  <!-- Overlay e menu mobile -->
   <div class="menu-overlay" id="menuOverlay"></div>
 
   <nav class="mobile-menu" id="mobileMenu">
@@ -70,7 +89,8 @@
     </ul>
   </nav>
 
-<script type="module" src="js/servico.js"></script>
-<script type="module" src="js/header.js"></script>
+  <script type="module" src="js/servico.js"></script>
+  <script type="module" src="js/header.js"></script>
 </body>
+
 </html>

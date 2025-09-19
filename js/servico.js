@@ -167,3 +167,57 @@ btnChat.addEventListener("click", async () => {
 // Inicialização
 // ---------------------------
 carregarServico();
+
+const stars = document.querySelectorAll("#starRating span");
+  let currentRating = 0;
+
+  stars.forEach(star => {
+    star.addEventListener("mouseover", () => {
+      resetHover();
+      highlightHover(star.dataset.value);
+    });
+
+    star.addEventListener("mouseout", () => {
+      resetHover();
+    });
+
+    star.addEventListener("click", () => {
+      currentRating = star.dataset.value;
+      resetActive();
+      highlightActive(currentRating);
+      console.log("Avaliação enviada:", currentRating);
+    });
+  });
+
+  function highlightHover(rating) {
+    stars.forEach(star => {
+      if (star.dataset.value <= rating) star.classList.add("hover");
+    });
+  }
+
+  function resetHover() {
+    stars.forEach(star => star.classList.remove("hover"));
+  }
+
+  function highlightActive(rating) {
+    stars.forEach(star => {
+      if (star.dataset.value <= rating) star.classList.add("active");
+    });
+  }
+
+  function resetActive() {
+    stars.forEach(star => star.classList.remove("active"));
+  }
+
+  // Evento de clique no ícone de envio
+  const sendBtn = document.querySelector(".comentario i");
+  const comentario = document.querySelector(".comentario textarea");
+
+  sendBtn.addEventListener("click", () => {
+    if (comentario.value.trim() !== "") {
+      console.log("Comentário enviado:", comentario.value);
+      comentario.value = "";
+    } else {
+      alert("Digite um comentário antes de enviar!");
+    }
+  });
