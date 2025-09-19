@@ -35,7 +35,7 @@ main{
     justify-content: center;
     align-items: center;
 
-    width: 45vw;
+    width: 60vw;
     height: 90vh;
     margin: 0;
     background-color: white;
@@ -45,8 +45,8 @@ main{
 
 }
 .usuario-perfil{
-    height: 160px;
-    width: 160px;
+    height: 20vh;
+    width: 20vh;
     border-style:outset;
     border-radius: 100%;
     border-width: 6px;
@@ -64,25 +64,30 @@ main{
 }
 .container{
     height: 85vh;
-    width: 42vw;
-    padding: 10px;
+    width: 98%;
+   
     box-sizing: border-box;
     overflow-y: scroll;
     overflow-x: hidden;
     
 }
 .classe-linha{
-    margin: 10px;
-    height: 120px;
-    width: 38vw;
-    border-radius: 7px;
-    padding: 10px;
-   transition: border 0.5s ease, background-color 0.4s ease; 
+    margin: 1vh;
+    padding: 1vh;
+    margin-top: 2vh;
+    margin-bottom: 4vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+
+    border-radius: 6px;
+    transition: border 0.5s ease, background-color 0.4s ease; 
     /* border: 3px solid rgba(0, 0, 255, 0.37); */
     box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.11);
+    display: flex;
+    flex-direction: column;
 }
 .classe-linha:hover{
-    background-color: rgb(230, 237, 250);
+    background-color: rgb(217, 224, 255);
 }
 .container::-webkit-scrollbar-button {
   display: none;  
@@ -126,15 +131,16 @@ input:disabled, textarea:disabled {
     display: flex;
     flex-direction: row;
     justify-content:space-between;
+    align-items: center;
+    padding-bottom: 7px;
     
 }
 .campo {
     
     height: 70px;
-    width: 35vw;
-    padding: 5px 10px;
+    margin-bottom: 1vh;
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: 3px;
     outline: none;
     
     transition: border 0.5s ease, background-color 0.5s ease;
@@ -152,4 +158,33 @@ input:disabled, textarea:disabled {
  
 .titulo{
     color: rgba(0, 0, 255, 0.644);
+}
+.adicionar-arquivos{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+   
+    
+}
+
+.p-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid rgba(0, 0, 0, 0.513); 
+    border-radius: 4px;
+    height: 310px;
+    width: 190px;
+  
+    transition: border 0.2s ease, border-color 0.2s ease, background-color 0.4s ease;
+}
+
+.p-visual:hover {
+    border: 3px solid rgba(33, 81, 255, 0.556);
+    background-color: #a4adfe;          
+}
+
+.p-visual:active {
+    background-color: rgb(219, 206, 255); 
 }
