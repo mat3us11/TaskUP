@@ -1,5 +1,7 @@
 import { db } from "./firebase.js";
-import { collection, addDoc, doc, setDoc, updateDoc, query, orderBy, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { 
+  collection, addDoc, doc, setDoc, updateDoc, query, orderBy, onSnapshot, getDoc 
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 const auth = getAuth();
@@ -20,23 +22,28 @@ const chatDocRef = doc(db, "chats", chatId);
 const mensagensRef = collection(db, "chats", chatId, "mensagens");
 
 // ---------------------------
-// Mostra informações do anúncio
+// Carregar informações do anúncio + foto do contratado
 // ---------------------------
 async function carregarAnuncio() {
-  if (!anuncioId) return;
-  try {
-    const docRef = doc(db, "servicos", anuncioId);
-    const docSnap = await getDoc(docRef);
-    if (!docSnap.exists()) return;
+  let fotoUrl = "./img/perfilPadrao.webp";
 
-    const data = docSnap.data();
-    document.getElementById("anuncio-titulo").textContent = data.titulo;
-    document.getElementById("anuncio-preco").textContent = `R$ ${data.preco}`;
-    if (data.imagens && data.imagens[0]) {
-      document.getElementById("anuncio-img").src = data.imagens[0];
+  if (contratadoId) {
+    const userDoc = await getDoc(doc(db, "usuarios", contratadoId));
+    if (userDoc.exists() && userDoc.data().photoURL) {
+      fotoUrl = userDoc.data().photoURL;
     }
-  } catch (err) {
-    console.error("Erro ao carregar anúncio:", err);
+  }
+
+  document.getElementById("anuncio-img").src = fotoUrl;
+
+  // Se quiser carregar título/preço do anúncio
+  if (anuncioId) {
+    const anuncioDoc = await getDoc(doc(db, "anuncios", anuncioId));
+    if (anuncioDoc.exists()) {
+      const data = anuncioDoc.data();
+      document.getElementById("anuncio-titulo").textContent = data.titulo || "";
+      document.getElementById("anuncio-preco").textContent = data.preco ? `R$ ${data.preco}` : "";
+    }
   }
 }
 

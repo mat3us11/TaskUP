@@ -86,14 +86,17 @@ header {
      height: 60%;
      display: flex;
      flex-direction: column;
+     gap: 5px;
 }
 
 .texto h1{
     margin-bottom: 10px;
+    text-align: justify;
 }
 
 .texto p{
     width: 80%;
+    text-align: justify;
 }
 
 .botoes{

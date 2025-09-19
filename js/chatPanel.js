@@ -31,7 +31,7 @@ auth.onAuthStateChanged(async (user) => {
       const outroId = outro?.uid;
 
       // Foto do outro participante
-      let fotoUrl = "img/perfilPadrao.jpg";
+      let fotoUrl = "./img/perfilPadrao.webp";
       if (outroId) {
         const userDoc = await getDoc(doc(db, "usuarios", outroId));
         if (userDoc.exists() && userDoc.data().photoURL) {

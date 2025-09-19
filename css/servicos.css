@@ -110,10 +110,10 @@ header {
 }
 
 .lista-servicos {
-   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px); /* tamanho fixo */
   gap: 25px;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .servico-card {
