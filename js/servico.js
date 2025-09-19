@@ -1,5 +1,5 @@
 import { db } from "./firebase.js";
-import { doc, getDoc, collection, query, where, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { doc, getDoc, collection, query, where, getDocs, setDoc, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 const auth = getAuth();
@@ -55,37 +55,36 @@ async function carregarServico() {
     autorEl.textContent = `Publicado por: ${servicoData.userName || "Anônimo"}`;
 
     if (servicoData.whatsapp) {
-  contatosEl.innerHTML += `
-    <p>
-      <a href="https://wa.me/55${servicoData.whatsapp}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        <i class="fab fa-whatsapp" style="color:#25D366;"></i>
-      </a>
-    </p>`;
-}
+      contatosEl.innerHTML += `
+        <p>
+          <a href="https://wa.me/55${servicoData.whatsapp}" target="_blank">
+            <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+          </a>
+        </p>`;
+    }
 
-if (servicoData.instagram) {
-  contatosEl.innerHTML += `
-    <p>
-      <a href="https://www.instagram.com/${servicoData.instagram}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-    <i class="fab fa-instagram" style="color:#E4405F;"></i>
-  </a>
-    </p>`;
-}
+    if (servicoData.instagram) {
+      contatosEl.innerHTML += `
+        <p>
+          <a href="https://www.instagram.com/${servicoData.instagram}" target="_blank">
+            <i class="fab fa-instagram" style="color:#E4405F;"></i>
+          </a>
+        </p>`;
+    }
 
-if (servicoData.facebook) {
-  contatosEl.innerHTML += `
-    <p>
-      <a href="https://www.facebook.com/${servicoData.facebook}" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-    <i class="fab fa-facebook" style="color:#1877F2;"></i>
-  </a>
-    </p>`;
-}
-
+    if (servicoData.facebook) {
+      contatosEl.innerHTML += `
+        <p>
+          <a href="https://www.facebook.com/${servicoData.facebook}" target="_blank">
+            <i class="fab fa-facebook" style="color:#1877F2;"></i>
+          </a>
+        </p>`;
+    }
 
     imagens = servicoData.imagens || [];
-
-    
     renderSlideshow();
+
+    carregarUltimasAvaliacoes();
   } catch (err) {
     console.error(err);
     alert("Erro ao carregar serviço.");
@@ -134,7 +133,6 @@ async function iniciarOuAbrirChat(outroId, outroNome) {
 
   const chatsRef = collection(db, "chats");
 
-  // Verifica se já existe chat entre os dois
   const q = query(chatsRef, where("participantesIds", "array-contains", user.uid));
   const snapshot = await getDocs(q);
 
@@ -147,9 +145,8 @@ async function iniciarOuAbrirChat(outroId, outroNome) {
     }
   });
 
-  // Se não existir, cria um novo chat
   if (!chatId) {
-    const novoChatRef = doc(chatsRef); // ID gerado automaticamente
+    const novoChatRef = doc(chatsRef);
     await setDoc(novoChatRef, {
       participantesIds: [user.uid, outroId],
       participantesInfo: [
@@ -162,73 +159,121 @@ async function iniciarOuAbrirChat(outroId, outroNome) {
     chatId = novoChatRef.id;
   }
 
-  // Redireciona para o chat
   window.location.href = `chat.html?chatId=${chatId}&contratado=${encodeURIComponent(outroNome)}&contratadoId=${outroId}`;
 }
 
-// Botão de chat
 btnChat.addEventListener("click", async () => {
   const contratadoId = servicoData.userId;
   const contratadoNome = servicoData.userName || "Anônimo";
-
   await iniciarOuAbrirChat(contratadoId, contratadoNome);
 });
+
+// ---------------------------
+// Avaliação (estrelas + comentário)
+// ---------------------------
+const stars = document.querySelectorAll("#starRating span");
+let currentRating = 0;
+
+stars.forEach(star => {
+  star.addEventListener("mouseover", () => {
+    resetHover();
+    highlightHover(star.dataset.value);
+  });
+
+  star.addEventListener("mouseout", () => {
+    resetHover();
+  });
+
+  star.addEventListener("click", () => {
+    currentRating = star.dataset.value;
+    resetActive();
+    highlightActive(currentRating);
+  });
+});
+
+function highlightHover(rating) {
+  stars.forEach(star => {
+    if (star.dataset.value <= rating) star.classList.add("hover");
+  });
+}
+
+function resetHover() {
+  stars.forEach(star => star.classList.remove("hover"));
+}
+
+function highlightActive(rating) {
+  stars.forEach(star => {
+    if (star.dataset.value <= rating) star.classList.add("active");
+  });
+}
+
+function resetActive() {
+  stars.forEach(star => star.classList.remove("active"));
+}
+
+const sendBtn = document.querySelector(".comentario i");
+const comentario = document.querySelector(".comentario textarea");
+
+sendBtn.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  if (!user) return alert("Você precisa estar logado para avaliar!");
+
+  if (!currentRating) return alert("Escolha uma quantidade de estrelas!");
+  if (comentario.value.trim() === "") return alert("Digite um comentário antes de enviar!");
+
+  try {
+    await addDoc(collection(db, "servicos", servicoId, "avaliacoes"), {
+      userId: user.uid,
+      userName: user.displayName || "Anônimo",
+      rating: Number(currentRating),
+      comentario: comentario.value.trim(),
+      timestamp: serverTimestamp()
+    });
+
+    alert("Avaliação enviada com sucesso!");
+    comentario.value = "";
+    currentRating = 0;
+    resetActive();
+    carregarUltimasAvaliacoes();
+  } catch (err) {
+    console.error("Erro ao salvar avaliação:", err);
+    alert("Erro ao enviar avaliação.");
+  }
+});
+
+// ---------------------------
+// Mostrar últimas 3 avaliações
+// ---------------------------
+async function carregarUltimasAvaliacoes() {
+  const avaliacoesContainer = document.getElementById("ultimasAvaliacoes");
+  avaliacoesContainer.innerHTML = "<p>Carregando avaliações...</p>";
+
+  const q = query(collection(db, "servicos", servicoId, "avaliacoes"));
+  const snap = await getDocs(q);
+
+  if (snap.empty) {
+    avaliacoesContainer.innerHTML = "<p>Sem avaliações ainda.</p>";
+    return;
+  }
+
+  let avaliacoes = [];
+  snap.forEach(doc => avaliacoes.push(doc.data()));
+
+  avaliacoes.sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds);
+
+  avaliacoesContainer.innerHTML = "";
+  avaliacoes.slice(0, 3).forEach(av => {
+    const div = document.createElement("div");
+    div.classList.add("avaliacao");
+    div.innerHTML = `
+      <p><strong>${av.userName}</strong> - ${av.rating} ★</p>
+      <p>${av.comentario}</p>
+    `;
+    avaliacoesContainer.appendChild(div);
+  });
+}
 
 // ---------------------------
 // Inicialização
 // ---------------------------
 carregarServico();
-
-const stars = document.querySelectorAll("#starRating span");
-  let currentRating = 0;
-
-  stars.forEach(star => {
-    star.addEventListener("mouseover", () => {
-      resetHover();
-      highlightHover(star.dataset.value);
-    });
-
-    star.addEventListener("mouseout", () => {
-      resetHover();
-    });
-
-    star.addEventListener("click", () => {
-      currentRating = star.dataset.value;
-      resetActive();
-      highlightActive(currentRating);
-      console.log("Avaliação enviada:", currentRating);
-    });
-  });
-
-  function highlightHover(rating) {
-    stars.forEach(star => {
-      if (star.dataset.value <= rating) star.classList.add("hover");
-    });
-  }
-
-  function resetHover() {
-    stars.forEach(star => star.classList.remove("hover"));
-  }
-
-  function highlightActive(rating) {
-    stars.forEach(star => {
-      if (star.dataset.value <= rating) star.classList.add("active");
-    });
-  }
-
-  function resetActive() {
-    stars.forEach(star => star.classList.remove("active"));
-  }
-
-  // Evento de clique no ícone de envio
-  const sendBtn = document.querySelector(".comentario i");
-  const comentario = document.querySelector(".comentario textarea");
-
-  sendBtn.addEventListener("click", () => {
-    if (comentario.value.trim() !== "") {
-      console.log("Comentário enviado:", comentario.value);
-      comentario.value = "";
-    } else {
-      alert("Digite um comentário antes de enviar!");
-    }
-  });

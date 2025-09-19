@@ -1,7 +1,14 @@
 import { auth, db, storage } from "./firebase.js";
-import { onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { doc, getDoc, setDoc, collection, getDocs, query, where, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-storage.js";
+import { 
+  onAuthStateChanged, 
+  updateProfile 
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { 
+  doc, getDoc, setDoc, collection, getDocs, query, where, deleteDoc, updateDoc 
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { 
+  ref, uploadBytes, getDownloadURL 
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-storage.js";
 
 const nomeUsuario = document.getElementById("nomeUsuario");
 const emailUsuario = document.getElementById("emailUsuario");
@@ -27,9 +34,13 @@ const categoriaInput = document.getElementById("categoriaServicoInput");
 const imagensInput = document.getElementById("imagensServicoInput");
 const btnSalvarServico = document.getElementById("salvarServico");
 
+const avaliacoesEl = document.getElementById("avaliacoes");
+const mediaAvaliacoesEl = document.getElementById("mediaAvaliacoes");
+
 let servicoAtualId = null;
 let imagensAtual = [];
 
+// ====================== AUTENTICAÇÃO ======================
 onAuthStateChanged(auth, async (user) => {
   if (!user) return window.location.href = "login.html";
 
@@ -46,8 +57,10 @@ onAuthStateChanged(auth, async (user) => {
   cursoUsuario.textContent = userDoc.exists() ? userDoc.data().curso || "Não informado" : "";
 
   await carregarServicos(user.uid);
+  await carregarAvaliacoes(user.uid);
 });
 
+// ====================== SERVIÇOS ======================
 async function carregarServicos(userId) {
   const q = query(collection(db, "servicos"), where("userId", "==", userId));
   const snapshot = await getDocs(q);
@@ -98,8 +111,45 @@ async function carregarServicos(userId) {
   });
 }
 
+// ====================== AVALIAÇÕES ======================
+async function carregarAvaliacoes(userId) {
+  avaliacoesEl.innerHTML = "<p>Carregando avaliações...</p>";
+  let avaliacoes = [];
 
-// Atualização de foto pelo botão
+  // busca todos os serviços do usuário
+  const servicosSnap = await getDocs(query(collection(db, "servicos"), where("userId", "==", userId)));
+  
+  for (const servicoDoc of servicosSnap.docs) {
+    const avaliacoesSnap = await getDocs(collection(db, "servicos", servicoDoc.id, "avaliacoes"));
+    avaliacoesSnap.forEach(a => {
+      avaliacoes.push(a.data());
+    });
+  }
+
+  if (avaliacoes.length === 0) {
+    avaliacoesEl.innerHTML = "<p>Sem avaliações ainda.</p>";
+    mediaAvaliacoesEl.textContent = "⭐ Sem avaliações";
+    return;
+  }
+
+  // calcula média
+  let media = avaliacoes.reduce((acc, a) => acc + a.rating, 0) / avaliacoes.length;
+  mediaAvaliacoesEl.textContent = `⭐ ${media.toFixed(1)} (${avaliacoes.length} avaliações)`;
+
+  avaliacoesEl.innerHTML = "";
+  avaliacoes.forEach(av => {
+    const div = document.createElement("div");
+    div.classList.add("avaliacao-card");
+    div.innerHTML = `
+      <p><strong>${av.userName}</strong> avaliou com ${av.rating} ★</p>
+      <p>${av.comentario}</p>
+      <small>${av.timestamp?.toDate ? av.timestamp.toDate().toLocaleString() : ""}</small>
+    `;
+    avaliacoesEl.appendChild(div);
+  });
+}
+
+// ====================== FOTO PERFIL ======================
 btnEditarFoto.addEventListener("click", () => uploadFoto.click());
 uploadFoto.addEventListener("change", async (e) => {
   const file = e.target.files[0];
@@ -111,12 +161,12 @@ uploadFoto.addEventListener("change", async (e) => {
   const url = await getDownloadURL(storageRef);
 
   await updateProfile(user, { photoURL: url });
-  await setDoc(doc(db, "usuarios", user.uid), { photoURL: url }, { merge: true }); // <- Salva no Firestore também
+  await setDoc(doc(db, "usuarios", user.uid), { photoURL: url }, { merge: true });
   fotoPerfil.src = url;
   alert("Foto atualizada!");
 });
 
-// Abrir modal de edição de perfil
+// ====================== EDITAR PERFIL ======================
 btnEditarPerfil.onclick = async () => {
   const user = auth.currentUser;
   nomeInput.value = user.displayName || "";
@@ -126,9 +176,12 @@ btnEditarPerfil.onclick = async () => {
 };
 
 spanClosePerfil.onclick = () => modalPerfil.style.display = "none";
-window.onclick = (e) => { if (e.target == modalPerfil) modalPerfil.style.display = "none"; };
+window.onclick = (e) => { 
+  if (e.target == modalPerfil) modalPerfil.style.display = "none"; 
+  if (e.target == modalServico) modalServico.style.display = "none"; 
+};
 
-// Salvar alterações do perfil
+// salvar perfil
 btnSalvarPerfil.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) return;
@@ -158,11 +211,10 @@ btnSalvarPerfil.addEventListener("click", async () => {
   modalPerfil.style.display = "none";
 });
 
-// Modal serviços
+// ====================== MODAL SERVIÇOS ======================
 btnCloseServico.onclick = () => modalServico.style.display = "none";
-window.onclick = (e) => { if (e.target == modalServico) modalServico.style.display = "none"; }
 
-// Salvar serviço editado
+// salvar serviço editado
 btnSalvarServico.addEventListener("click", async () => {
   if (!servicoAtualId) return;
 
@@ -183,8 +235,6 @@ btnSalvarServico.addEventListener("click", async () => {
   }
 
   const servicoRef = doc(db, "servicos", servicoAtualId);
-  const docSnap = await getDoc(servicoRef);
-
 
   const updateData = {
     titulo: novoTitulo,
