@@ -4,6 +4,37 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth
 
 const auth = getAuth();
 const listaChatsEl = document.getElementById("lista-chats");
+const LAST_READ_PREFIX = "chat:lastRead:";
+
+function timestampToMillis(timestamp) {
+  if (!timestamp) return null;
+  if (typeof timestamp === "number") return timestamp;
+  if (typeof timestamp.toMillis === "function") {
+    try {
+      return timestamp.toMillis();
+    } catch (err) {
+      console.warn("Falha ao converter timestamp via toMillis:", err);
+    }
+  }
+  if (typeof timestamp.seconds === "number") {
+    const nanos = typeof timestamp.nanoseconds === "number" ? timestamp.nanoseconds : 0;
+    return timestamp.seconds * 1000 + Math.round(nanos / 1e6);
+  }
+  const data = new Date(timestamp);
+  return Number.isNaN(data.getTime()) ? null : data.getTime();
+}
+
+function obterUltimoLido(chatId) {
+  if (!chatId) return null;
+  try {
+    const valor = localStorage.getItem(`${LAST_READ_PREFIX}${chatId}`);
+    const numero = Number(valor);
+    return Number.isFinite(numero) ? numero : null;
+  } catch (err) {
+    console.warn("Não foi possível ler o último timestamp de leitura:", err);
+    return null;
+  }
+}
 
 auth.onAuthStateChanged(async (user) => {
   if (!user) {
@@ -50,9 +81,14 @@ auth.onAuthStateChanged(async (user) => {
 
       // Última mensagem e horário
       const ultimoTexto = chat.lastMessage || "";
-      const timestamp = chat.lastTimestamp
-        ? new Date(chat.lastTimestamp.seconds * 1000).toLocaleString()
+      const lastTimestampMillis = timestampToMillis(chat.lastTimestamp);
+      const timestamp = lastTimestampMillis
+        ? new Date(lastTimestampMillis).toLocaleString()
         : "";
+      const ultimoLido = obterUltimoLido(chatId);
+      const temNaoLidas = Boolean(
+        lastTimestampMillis && (!ultimoLido || lastTimestampMillis > ultimoLido)
+      );
 
       // Monta o chat
       const div = document.createElement("div");
@@ -67,6 +103,23 @@ auth.onAuthStateChanged(async (user) => {
         </div>
         <button class="btn-excluir">Excluir</button>
       `;
+
+      if (temNaoLidas) {
+        div.classList.add("chat-unread");
+        const badge = document.createElement("span");
+        badge.className = "unread-badge";
+        badge.textContent = "Novo";
+        const deleteBtn = div.querySelector(".btn-excluir");
+        if (deleteBtn) {
+          div.insertBefore(badge, deleteBtn);
+        } else {
+          div.appendChild(badge);
+        }
+        const ultimaMsgEl = div.querySelector(".ultima-msg");
+        if (ultimaMsgEl) {
+          ultimaMsgEl.classList.add("ultima-msg-nova");
+        }
+      }
 
       // Abrir chat
       div.querySelector(".chat-info").addEventListener("click", () => {

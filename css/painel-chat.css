@@ -118,6 +118,7 @@ header {
   transition: all 0.25s ease;
   position: relative;
   border: 1px solid transparent;
+  gap: 12px;
 }
 
 .chat-item:hover {
@@ -125,6 +126,39 @@ header {
   transform: translateY(-2px);
   border-color: #d0d8f8;
   box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.chat-item.chat-unread {
+  background: #f0fff5;
+  border-color: rgba(37, 211, 102, 0.55);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.12);
+}
+
+.chat-item.chat-unread .nome {
+  color: #1f5130;
+  font-weight: 700;
+}
+
+.chat-item.chat-unread .ultima-msg,
+.ultima-msg-nova {
+  color: #1f5130;
+  font-weight: 600;
+}
+
+.unread-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: auto;
 }
 
 .chat-item img.user-photo {
