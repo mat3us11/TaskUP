@@ -21,7 +21,7 @@ main{
     justify-content: space-between;
     align-items: center;
     
-    width: 30vw;
+    width: 28vw;
     height: 90vh;
     /* background-color: red; */
     box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.253);
@@ -35,7 +35,7 @@ main{
     justify-content: center;
     align-items: center;
 
-    width: 60vw;
+    width: 55vw;
     height: 90vh;
     margin: 0;
     background-color: white;
@@ -129,9 +129,9 @@ input:disabled, textarea:disabled {
 }
 .linha-de-cima{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content:space-between;
-    align-items: center;
+    align-items: start;
     padding-bottom: 7px;
     
 }
@@ -187,4 +187,42 @@ input:disabled, textarea:disabled {
 
 .p-visual:active {
     background-color: rgb(219, 206, 255); 
+}
+.contDescMens{
+    display: flex;
+    border-radius: 7px;
+    flex-direction: column;
+    justify-content:start;
+    align-items: center;
+    width: 81%;
+    height: 16%;
+    box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.246);
+    margin-bottom: 2vh;
+    padding: 24px;
+}
+
+/* Lista */
+.baseLista{
+    margin-top: 1vh;
+    margin-bottom: 4vh;
+    padding: 1vh;
+    border-radius: 6px;
+    transition: border 0.5s ease, background-color 0.4s ease; 
+    box-shadow: -3px 3px 13px 6px rgba(0, 0, 0, 0.11);
+    width: 95%;
+}
+.baseLista:hover{
+    background-color: rgb(255, 255, 255);
+}
+.lista{
+    display: flex;
+    color: rgba(34, 34, 34, 0.607);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.tituloLIsta{
+    color: rgba(0, 0, 73, 0.644);
+    margin-top: 1vh;
+}
+.linhaDaLista{
+    width: 100%;
 }
